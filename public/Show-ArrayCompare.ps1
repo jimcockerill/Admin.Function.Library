@@ -37,8 +37,8 @@ function Show-ArrayCompare {
         # Returns Bob
     
     .NOTES
-        Author: Optimized Version
-        Date: 2024-12-01
+        Author: James Cockerill
+        Date: 01/12/2025
     #>
     
     [CmdletBinding()]

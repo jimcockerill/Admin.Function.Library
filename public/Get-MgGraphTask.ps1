@@ -1,10 +1,5 @@
 # Public\Get-MgGraphTask.ps1
 
-<#Remove-Module CT_Function_Library  
-Import-Module "C:\Scratch\Github\UKCT-Scripts\James\CT_Lib_Module\CT_Function_Library.psm1"#>
-
-# Public\Get-MgGraphTask.ps1
-
 function Get-MgGraphTask {
     [CmdletBinding()]
     param(
@@ -31,13 +26,10 @@ function Get-MgGraphTask {
     begin {
         Write-Verbose "Starting Microsoft Graph API call"
         
-        # Verify connection
-        try {
-            $null = Get-MgOrganization -ErrorAction Stop | Select-Object -First 1
-        }
-        catch {
-            Write-Verbose "Authentication needed. Please call Connect-MgGraph"
-            return
+        ## Verify MS Graph connection
+        $context = Get-MgContext
+        if (-not $context) {
+            throw "Not connected to MS Graph. Please run Connect-MgGraph."
         }
     }
     

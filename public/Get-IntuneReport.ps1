@@ -30,6 +30,12 @@ function Get-IntuneReport {
     
     begin {
         Write-Verbose "Generating Intune Report request"
+        
+        ## Verify MS Graph connection
+        $context = Get-MgContext
+        if (-not $context) {
+            throw "Not connected to MS Graph. Please run Connect-MgGraph."
+        }
     }
     
     process {
