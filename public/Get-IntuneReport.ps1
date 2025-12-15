@@ -53,9 +53,9 @@ function Get-IntuneReport {
         $Resource = 'deviceManagement/reports/exportJobs'
         $RepName = $(($Body | ConvertFrom-Json).reportName)
         $Report = "$RepName-$(Get-Date -Format "yyyyMMddHHmmss")"
-        $RequestReply = Get-MgGraphTask -Method 'Post' -Version 'beta' -Resource $Resource -Body $Body
+        $RequestReply = Invoke-MgGraphTask -Method 'Post' -Version 'beta' -Resource $Resource -Body $Body
         while ($true) {
-            $ExportJobData = Get-MgGraphTask -Method 'Get' -Version 'beta' -Resource "deviceManagement/reports/exportJobs('$($RequestReply.id)')"
+            $ExportJobData = Invoke-MgGraphTask -Method 'Get' -Version 'beta' -Resource "deviceManagement/reports/exportJobs('$($RequestReply.id)')"
             $FixedPercent = [Math]::Min(99, $FixedPercent + (100 - $FixedPercent) * 0.15)
             Write-Progress -Activity "Processing Report..." -PercentComplete $FixedPercent
             if ($ExportJobData.status -eq 'completed') {
