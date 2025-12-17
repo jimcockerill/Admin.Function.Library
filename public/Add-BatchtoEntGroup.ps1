@@ -1,6 +1,6 @@
-# Public\Add-BatchtoGroup.ps1
+# Public\Add-BatchtoEntGroup.ps1
 
-function Add-BatchToGroup {
+function Add-BatchtoEntGroup {
     <#
     .SYNOPSIS
         Adds multiple members to an Entra ID group using MS Graph batch requests
